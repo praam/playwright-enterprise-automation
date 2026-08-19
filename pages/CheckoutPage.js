@@ -1,23 +1,22 @@
-import { BasePage } from "./Basepage";
+import { BasePage } from "./BasePage";
 
 export class CheckoutPage extends BasePage {
 
-   constructor(page){
+   constructor( page ){
 
-        super(page);
+        super( page );
+
         this.firstNameInput = page.locator('#first-name');
         this.lastNameInput = page.locator('#last-name');
         this.postalCodeInput = page.locator('#postal-code');
         this.continueButton = page.locator('#continue');
-        
-
         this.finishButton = page.locator('#finish');
         this.completeHeader = page.locator('.complete-header');
         this.completeText = page.locator('.complete-text');
 
    }
 
-   async fillInformation(firstName, lastName, postalCode) {
+   async fillInformation( firstName, lastName, postalCode ) {
     
       await this.firstNameInput.fill(firstName);
       await this.lastNameInput.fill(lastName);

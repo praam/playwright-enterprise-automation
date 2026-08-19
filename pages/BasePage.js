@@ -1,6 +1,6 @@
 export class BasePage {
     
-    constructor(page){
+    constructor( page ){
 
         this.page = page;
 
@@ -8,13 +8,13 @@ export class BasePage {
 
     async navigate(path = '/'){
 
-       await this.page.goto(path);
+       await this.page.goto( path );
 
     }
 
     async getPageTitle() {
 
-       return await this.page.title();
+       return this.page.title();
 
   }
 

@@ -1,15 +1,15 @@
-import { BasePage } from "./Basepage";
+import { BasePage } from "./BasePage";
 
 export class LoginPage extends BasePage {
     
     constructor(page){
         
-        super(page);
+        super( page );
 
         this.usernameInput = page.getByPlaceholder('Username');
-        this.passwordInput =  page.getByPlaceholder('password') ;
+        this.passwordInput =  page.getByPlaceholder('Password') ;
 
-        this.loginButton = page.getByRole('button', {name: 'Login',});
+        this.loginButton = page.getByRole('button', {name: 'Login'});
 
         this.loginError = page.locator('[data-test="error"]');
 

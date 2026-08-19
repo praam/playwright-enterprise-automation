@@ -1,20 +1,23 @@
-import { BasePage } from "./Basepage";
+import { BasePage } from "./BasePage";
 
 export class InventoryPage extends BasePage {
 
     
-    constructor(page) {
+    constructor( page ) {
       
-       super(page);
-        this.title = page.locator('.title');
-        this.shoppingCartLink = page.locator('.shopping_cart_link');  
+        super( page );
+
+        this.pageTitle = page.locator('.title');
+        this.shoppingCartLink = page.locator('.shopping_cart_link'); 
+        
 
     }
 
   getAddToCartButton(productName) {
 
     
-    const formattedName = productName.toLowerCase().replace(/ /g, '-');
+    const formattedName = productName.toLowerCase()
+    .replace(/\s+/g, '-');
     return this.page.locator(`#add-to-cart-${formattedName}`);
 
 
@@ -32,7 +35,6 @@ export class InventoryPage extends BasePage {
   async goToCart() {
 
     await this.shoppingCartLink.click();
-
 
   }
 
