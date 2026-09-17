@@ -1,5 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage.js';
+import users from '../test-data/users/users.json' with { type: 'json' };
 
 const authFile = 'playwright/.auth/user.json';
 
@@ -10,10 +11,9 @@ setup('authenticate', async ({ page }) => {
     await loginPage.navigate();
 
     await loginPage.login(
-        'standard_user',
-        'secret_sauce'
-    );
-
+    users.standardUser.username,
+    users.standardUser.password
+  );
     // Wait for authentication to complete
     await expect(page).toHaveURL(/inventory\.html/);
 
