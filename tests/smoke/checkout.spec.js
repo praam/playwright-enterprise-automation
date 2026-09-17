@@ -1,4 +1,6 @@
 import { test, expect } from '../../fixtures/test.js';
+import checkoutData from '../../test-data/checkout/checkoutData.json' with { type: 'json' };
+import products from '../../test-data/products/products.json' with { type: 'json' };
 
 test.describe('Checkout - Smoke Tests', () => {
 
@@ -18,10 +20,7 @@ test.describe('Checkout - Smoke Tests', () => {
     await expect(inventoryPage.pageTitle)
         .toHaveText('Products');
 
-    const itemsToBuy = [
-        'Sauce Labs Backpack',
-        'Sauce Labs Bike Light'
-    ];
+    const itemsToBuy = products.checkoutProducts;
 
     await inventoryPage.addProductsToCart(itemsToBuy);
 
@@ -39,9 +38,9 @@ test.describe('Checkout - Smoke Tests', () => {
         await cartPage.proceedToCheckout();
 
         await checkoutPage.fillInformation(
-            'John',
-            'Doe',
-            '560001'
+            checkoutData.validCustomer.firstName,
+            checkoutData.validCustomer.lastName,
+            checkoutData.validCustomer.postalCode
         );
 
         await checkoutPage.finishCheckout();
@@ -49,11 +48,10 @@ test.describe('Checkout - Smoke Tests', () => {
         const confirmation =
             await checkoutPage.getConfirmationDetails();
 
-        expect(confirmation.header)
-            .toContain('Thank you for your order!');
+        expect(confirmation.header).toContain("Thank you for your order!");
 
-        expect(confirmation.text)
-            .toContain('Your order has been dispatched');
+        expect(confirmation.text).toContain("Your order has been dispatched");
+
     });
 
 });
