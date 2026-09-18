@@ -1,7 +1,9 @@
 import { test, expect } from '../../fixtures/test.js';
 import users from '../../test-data/users/users.json' with { type: 'json' };
 
-test.describe('Login - Smoke Tests', () => {
+test.describe('Login - Smoke Tests', {
+    tag: ['@smoke', '@authentication']
+}, () => {
 
     test('Sauce Demo - Smoke Tests', async ({ loginPage }) => {
 
