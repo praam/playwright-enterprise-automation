@@ -2,6 +2,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import environment from './config/environment.js';
 
+const useSystemEdge = !process.env.CI && process.platform === 'win32';
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -26,7 +28,16 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html'], ['list']],
+  reporter: [
+    ['html', {
+        outputFolder: 'playwright-report',
+        open: 'never'
+    }],
+    ['list'],
+    ['allure-playwright']
+],
+
+preserveOutput: 'always',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -45,16 +56,21 @@ export default defineConfig({
   projects: [
 
      // Authentication setup
-    {
-        name: 'setup',
-        testMatch: /.*\.setup\.js/,
+{
+    name: 'setup',
+    testMatch: /.*\.setup\.js/,
+    use: {
+        ...(useSystemEdge ? { channel: 'msedge' } : {}),
     },
-
+},
     // Unauthenticated tests
-    {
-        name: 'unauthenticated',
-        testMatch: /tests\/auth\/.*\.spec\.js/,
+{
+    name: 'unauthenticated',
+    testMatch: /tests\/auth\/.*\.spec\.js/,
+    use: {
+        ...(useSystemEdge ? { channel: 'msedge' } : {}),
     },
+},
 
     // Authenticated Chromium tests
     {
@@ -62,6 +78,7 @@ export default defineConfig({
     testIgnore: /tests\/auth\/.*\.spec\.js/,
     use: {
         ...devices['Desktop Chrome'],
+        ...(useSystemEdge ? { channel: 'msedge' } : {}),
         storageState: 'playwright/.auth/user.json',
     },
     dependencies: ['setup'],

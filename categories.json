@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Product Defect",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*(expect|assert|Assertion).*"
+  },
+  {
+    "name": "Automation Defect",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*"
+  }
+]
