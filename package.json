@@ -1,5 +1,6 @@
 {
   "name": "playwright-enterprise-framework",
+  "type": "module",
   "version": "1.0.0",
   "description": "Enterprise-level Playwright automation framework",
   "scripts": {
@@ -13,5 +14,11 @@
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.1.1",
     "allure-playwright": "^3.12.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "dotenv": "^18.0.5"
   }
 }
