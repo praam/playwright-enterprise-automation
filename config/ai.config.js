@@ -1,8 +1,15 @@
 import 'dotenv/config';
 
 const aiConfig = {
-    apiKey: process.env.AI_API_KEY || '',
-    enabled: Boolean(process.env.AI_API_KEY)
+
+    provider: process.env.AI_PROVIDER || 'mock',
+
+    apiKey: process.env.GEMINI_API_KEY || '',
+
+    model: process.env.GEMINI_MODEL || 'gemini-3.8-flash',
+
+    enabled: Boolean(process.env.GEMINI_API_KEY)
+
 };
 
 export default aiConfig;

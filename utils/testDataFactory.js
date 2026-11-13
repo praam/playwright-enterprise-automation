@@ -22,12 +22,17 @@ export class TestDataFactory {
                 const aiService = new AIDataService();
 
                 user = await aiService.generate(
-                    'Generate a valid test user',
-                    userSchema
-                );
-
-                break;
-            }
+    `Generate a synthetic test user as JSON.
+     Return exactly these three properties:
+     firstName (string),
+     lastName (string),
+     email (valid email address).
+     Do not include any additional properties.
+     Use camelCase property names.`,
+    userSchema,
+    1
+);
+                break;}
 
             default:
                 throw new Error(

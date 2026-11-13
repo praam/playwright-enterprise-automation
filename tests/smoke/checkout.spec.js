@@ -17,7 +17,8 @@ test.describe('Checkout - Smoke Tests', {
     async ({
         inventoryPage,
         cartPage,
-        checkoutPage
+        checkoutPage,
+         generatedUser
     }) => {
 
         await allure.severity("critical");
@@ -52,10 +53,10 @@ test.describe('Checkout - Smoke Tests', {
         await cartPage.proceedToCheckout();
 
         await checkoutPage.fillInformation(
-            checkoutData.validCustomer.firstName,
-            checkoutData.validCustomer.lastName,
-            checkoutData.validCustomer.postalCode
-        );
+          generatedUser.firstName,
+          generatedUser.lastName,
+          checkoutData.validCustomer.postalCode
+);
 
         await checkoutPage.finishCheckout();
 

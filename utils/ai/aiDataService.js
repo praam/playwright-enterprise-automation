@@ -1,3 +1,4 @@
+
 import { AIProviderFactory } from './aiProviderFactory.js';
 import { TestDataValidator } from '../testDataValidator.js';
 
@@ -15,10 +16,12 @@ export class AIDataService {
 
             const data = await this.provider.generateData(prompt);
 
+            // Return generated data if no schema is provided
             if (!schema) {
                 return data;
             }
 
+            // Validate generated data against the schema
             const validation = TestDataValidator.validate(data, schema);
 
             if (validation.valid) {
@@ -37,5 +40,4 @@ export class AIDataService {
             JSON.stringify(lastValidationErrors)
         );
     }
-
 }
